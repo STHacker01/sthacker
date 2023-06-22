@@ -74,7 +74,8 @@
         // Read data from Firebase Realtime Database
         firebase.database().ref('/text').once('value').then(function(snapshot) {
             const text = snapshot.val();
-            document.getElementById('textview').innerText = text;
+            document.getElementById('button').innerText = text;
+                                  
         });
     </script>
 </head>
