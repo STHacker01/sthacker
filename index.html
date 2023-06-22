@@ -9,13 +9,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 250vh;
+            height: 100vh;
         }
 
         .container {
             background-color: #f0f0f0;
             border-radius: 30px;
-            bozzzzz x-shadow: 8px 8px 20px #c7c7c7, -8px -8px 20px #ffffff;
+            box-shadow: 8px 8px 20px #c7c7c7, -8px -8px 20px #ffffff;
             padding: 30px;
             display: flex;
             flex-direction: column;
@@ -49,34 +49,39 @@
         }
 
         /* Media queries for mobile mode */
-        @media (max-width: 767px) {
-            .container {
-                padding: 20px;
-            }
 
-            .button {
-                font-size: 16px;
-                padding: 8px 16px;
-            }
-
-            .textview {
-                font-size: 16px;
-                padding: 10px;
-            }
-        }
+        /* ... */
 
         /* Media queries for desktop mode */
-        @media (min-width: 768px) {
-            .container {
-                width: 500px;
-            }
-        }
+
+        /* ... */
     </style>
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js"></script>
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBqTxXnIvjpQZ2bH_7z7wale_7cBrY6hbU",
+  authDomain: "ritz-park-tower.firebaseapp.com",
+  databaseURL: "https://ritz-park-tower-default-rtdb.firebaseio.com",
+  projectId: "ritz-park-tower",
+  storageBucket: "ritz-park-tower.appspot.com",
+  messagingSenderId: "212778366394",
+  appId: "1:212778366394:web:eec573a2d78eb2cba95983"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Read data from Firebase Realtime Database
+        firebase.database().ref('/text').once('value').then(function(snapshot) {
+            const text = snapshot.val();
+            document.getElementById('textview').innerText = text;
+        });
+    </script>
 </head>
 <body>
     <div class="container">
         <button class="button">Click Me</button>
-        <div class="textview">This is a neumorphism-style text view.</div>
+        <div class="textview" id="textview"></div>
     </div>
 </body>
 </html>
