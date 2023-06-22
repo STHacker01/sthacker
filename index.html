@@ -30,7 +30,7 @@
             const text = inputBox.value;
             firebase.database().ref('/text').set(text)
                 .then(function() {
-                    console.log('Data saved successfully.');
+                    console.log('Data save successfully.');
                 })
                 .catch(function(error) {
                     console.error('Error saving data:', error);
@@ -52,4 +52,3 @@
     </div>
 </body>
 </html>
-￼Enter
