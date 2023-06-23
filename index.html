@@ -1,56 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Neumorphism Design Website</title>
+    <title>Skeuomorphic Design Website</title>
     <style>
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
             background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #e8e8e8;
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 500px;
+            width: 80%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .input-box {
-            width: 300px;
-            height: 40px;
-            padding: 8px;
-            border: none;
-            background-color: #f2f2f2;
-            border-radius: 20px;
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2),
-                        -4px -4px 8px rgba(255, 255, 255, 0.5);
-            outline: none;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
         }
 
         .button {
-            width: 120px;
-            height: 40px;
-            margin-top: 20px;
-            background-color: #f2f2f2;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
             border: none;
-            border-radius: 20px;
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2),
-                        -4px -4px 8px rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            outline: none;
+            transition: background-color 0.3s ease;
         }
 
         .button:hover {
-            background-color: #d9d9d9;
+            background-color: #45a049;
         }
 
         .textview {
-            margin-top: 20px;
+            width: 100%;
             padding: 10px;
-            width: 300px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
             min-height: 100px;
-            background-color: #f2f2f2;
-            border-radius: 20px;
-            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2),
-                        -4px -4px 8px rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
@@ -69,7 +84,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             // Initialize Firebase
             const firebaseConfig = {
-               apiKey: "AIzaSyBKWoH5uZQ-4xOMNfB7zCCsG-7QZPdrNFQ",
+                apiKey: "AIzaSyBKWoH5uZQ-4xOMNfB7zCCsG-7QZPdrNFQ",
   authDomain: "ritz-park.firebaseapp.com",
   databaseURL: "https://ritz-park-default-rtdb.firebaseio.com",
   projectId: "ritz-park",
