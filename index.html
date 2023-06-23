@@ -87,4 +87,21 @@
             // Save data to Firebase Realtime Database
             saveButton.addEventListener('click', function() {
                 const text = inputBox.value;
-                firebase.database().ref('/text').set
+                firebase.database().ref('/text').set(text)
+                    .then(function() {
+                        console.log('Data saved successfully.');
+                    })
+                    .catch(function(error) {
+                        console.error('Error saving data:', error);
+                    });
+            });
+
+            // Read data from Firebase Realtime Database
+            firebase.database().ref('/text').on('value', function(snapshot) {
+                const text = snapshot.val();
+                textView.innerText = text;
+            });
+        });
+    </script>
+</body>
+</html>
