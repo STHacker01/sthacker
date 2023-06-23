@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Skeuomorphic Design Website</title>
+    <title>Ritz Park Tower Management</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,127 +13,102 @@
         }
 
         .container {
-            background-color: #dcdcdc;
-            border-radius: 20px;
-            padding: 20px;
-            max-width: 500px;
-            width: 80%;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .input-box {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #f7f7f7;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-size: 16px;
-            color: #333;
+            background-color: #f0f0f0;
+            border-radius: 30px;
+            box-shadow: 8px 8px 20px #c7c7c7, -8px -8px 20px #ffffff;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #3498db;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            box-shadow: 4px 4px 10px #c7c7c7, -4px -4px 10px #ffffff;
+            padding: 10px 20px;
             border: none;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 16px;
-            text-align: center;
+            color: #555;
+            font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .button:hover {
-            background-color: #258cd1;
-        }
-
-        .button:active {
-            transform: scale(0.95);
+            box-shadow: none;
         }
 
         .textview {
-            width: 100%;
-            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            box-shadow: 4px 4px 10px #c7c7c7, -4px -4px 10px #ffffff;
+            padding: 20px;
+            color: #555;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .blood-title {
+            color: #FF4136;
+            font-size: 48px;
+            text-shadow: 2px 2px 4px #FF4136;
             margin-bottom: 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #f7f7f7;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-size: 16px;
-            color: #333;
-            min-height: 100px;
         }
 
-        /* Media Queries for Mobile */
-        @media (max-width: 767px) {
-            .container {
-                max-width: 300px;
-            }
-        }
+        /* Media queries for mobile mode */
+
+        /* ... */
+
+        /* Media queries for desktop mode */
+
+        /* ... */
     </style>
-</head>
-<body>
-    <div class="container">
-        <input type="text" id="inputBox" class="input-box" placeholder="Enter text">
-        <button id="saveButton" class="button">Save</button>
-        <div class="textview" id="textview"></div>
-    </div>
-
-    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-database.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js"></script>
     <script>
-        // Wait for the DOM to be fully loaded
-        document.addEventListener("DOMContentLoaded", function() {
-            // Initialize Firebase
-            const firebaseConfig = {
-                apiKey: "AIzaSyBKWoH5uZQ-4xOMNfB7zCCsG-7QZPdrNFQ",
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKWoH5uZQ-4xOMNfB7zCCsG-7QZPdrNFQ",
   authDomain: "ritz-park.firebaseapp.com",
   databaseURL: "https://ritz-park-default-rtdb.firebaseio.com",
   projectId: "ritz-park",
   storageBucket: "ritz-park.appspot.com",
   messagingSenderId: "272741038168",
   appId: "1:272741038168:web:d2434c2c88eefe7cd9f22d"
-            };
-            firebase.initializeApp(firebaseConfig);
+        };
+        firebase.initializeApp(firebaseConfig);
 
-            // Get references to HTML elements
+        // Save data to Firebase Realtime Database
+        const saveButton = document.getElementById('saveButton');
+        saveButton.addEventListener('click', function() {
             const inputBox = document.getElementById('inputBox');
-            const saveButton = document.getElementById('saveButton');
-            const textView = document.getElementById('textview');
+            const text = inputBox.value;
+            firebase.database().ref('/text').set(text)
+                .then(function() {
+                    inputBox.value = '';
+                    console.log('Data saved successfully.');
+                })
+                .catch(function(error) {
+                    console.error('Error saving data:', error);
+                });
+        });
 
-            // Save data to Firebase Realtime Database
-            saveButton.addEventListener('click', function() {
-                const text = inputBox.value;
-                firebase.database().ref('/text').set(text)
-                    .then(function() {
-                        console.log('Data saved successfully.');
-                    })
-                    .catch(function(error) {
-                        console.error('Error saving data:', error);
-                    });
-                    
-                // Add animation class to the button
-                saveButton.classList.add('button-animation');
-                // Remove the animation class after the animation ends
-                setTimeout(function() {
-                    saveButton.classList.remove('button-animation');
-                }, 300);
-            });
-
-            // Read data from Firebase Realtime Database
-            firebase.database().ref('/text').on('value', function(snapshot) {
-                const text = snapshot.val();
-                textView.innerText = text;
-            });
+        // Read data from Firebase Realtime Database
+        firebase.database().ref('/text').once('value').then(function(snapshot) {
+            const text = snapshot.val();
+            document.getElementById('textview').innerText = text;
         });
     </script>
+</head>
+<body>
+    <div class="container">
+               <h1 class="blood-title">Blood</h1>
+        <div class="button-container">
+            <input type="text" id="inputBox" placeholder="Enter your text" />
+            <button id="saveButton" class="button">Save</button>
+        </div>
+        <div class="textview" id="textview"></div>
+    </div>
 </body>
 </html>
-
-
 
