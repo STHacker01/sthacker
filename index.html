@@ -16,39 +16,42 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js"></script>
     <script>
-        // Initialize Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyBKWoH5uZQ-4xOMNfB7zCCsG-7QZPdrNFQ",
+        // Wait for the DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyBKWoH5uZQ-4xOMNfB7zCCsG-7QZPdrNFQ",
   authDomain: "ritz-park.firebaseapp.com",
   databaseURL: "https://ritz-park-default-rtdb.firebaseio.com",
   projectId: "ritz-park",
   storageBucket: "ritz-park.appspot.com",
   messagingSenderId: "272741038168",
   appId: "1:272741038168:web:d2434c2c88eefe7cd9f22d"
-        };
-        firebase.initializeApp(firebaseConfig);
+            };
+            firebase.initializeApp(firebaseConfig);
 
-        // Get references to HTML elements
-        const inputBox = document.getElementById('inputBox');
-        const saveButton = document.getElementById('saveButton');
-        const textView = document.getElementById('textview');
+            // Get references to HTML elements
+            const inputBox = document.getElementById('inputBox');
+            const saveButton = document.getElementById('saveButton');
+            const textView = document.getElementById('textview');
 
-        // Save data to Firebase Realtime Database
-        saveButton.addEventListener('click', function() {
-            const text = inputBox.value;
-            firebase.database().ref('/text').set(text)
-                .then(function() {
-                    console.log('Data saved successfully.');
-                })
-                .catch(function(error) {
-                    console.error('Error saving data:', error);
-                });
-        });
+            // Save data to Firebase Realtime Database
+            saveButton.addEventListener('click', function() {
+                const text = inputBox.value;
+                firebase.database().ref('/text').set(text)
+                    .then(function() {
+                        console.log('Data saved successfully.');
+                    })
+                    .catch(function(error) {
+                        console.error('Error saving data:', error);
+                    });
+            });
 
-        // Read data from Firebase Realtime Database
-        firebase.database().ref('/text').on('value', function(snapshot) {
-            const text = snapshot.val();
-            textView.innerText = text;
+            // Read data from Firebase Realtime Database
+            firebase.database().ref('/text').on('value', function(snapshot) {
+                const text = snapshot.val();
+                textView.innerText = text;
+            });
         });
     </script>
 </body>
