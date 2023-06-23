@@ -5,18 +5,26 @@
     <style>
         /* ...CSS styles... */
     </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="inputBox" placeholder="Enter text">
+        <button id="saveButton" class="button">Save</button>
+        <div class="textview" id="textview"></div>
+    </div>
+
     <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js"></script>
     <script>
         // Initialize Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyBqTxXnIvjpQZ2bH_7z7wale_7cBrY6hbU",
-  authDomain: "ritz-park-tower.firebaseapp.com",
-  databaseURL: "https://ritz-park-tower-default-rtdb.firebaseio.com",
-  projectId: "ritz-park-tower",
-  storageBucket: "ritz-park-tower.appspot.com",
-  messagingSenderId: "212778366394",
-  appId: "1:212778366394:web:eec573a2d78eb2cba95983"
+            apiKey: "AIzaSyBKWoH5uZQ-4xOMNfB7zCCsG-7QZPdrNFQ",
+  authDomain: "ritz-park.firebaseapp.com",
+  databaseURL: "https://ritz-park-default-rtdb.firebaseio.com",
+  projectId: "ritz-park",
+  storageBucket: "ritz-park.appspot.com",
+  messagingSenderId: "272741038168",
+  appId: "1:272741038168:web:d2434c2c88eefe7cd9f22d"
         };
         firebase.initializeApp(firebaseConfig);
 
@@ -30,7 +38,7 @@
             const text = inputBox.value;
             firebase.database().ref('/text').set(text)
                 .then(function() {
-                    console.log('Data save successfully.');
+                    console.log('Data saved successfully.');
                 })
                 .catch(function(error) {
                     console.error('Error saving data:', error);
@@ -43,12 +51,6 @@
             textView.innerText = text;
         });
     </script>
-</head>
-<body>
-    <div class="container">
-        <input type="text" id="inputBox" placeholder="Enter text">
-        <button id="saveButton" class="button">Save</button>
-        <div class="textview" id="textview"></div>
-    </div>
 </body>
 </html>
+
