@@ -3,19 +3,7 @@
 <head>
     <title>Neumorphism Design Website</title>
     <style>
-        /* Add your existing CSS styles here */
-        
-        .blood-title {
-            font-size: 36px;
-            font-weight: bold;
-            color: #FF0000;
-            margin-top: 0;
-            margin-bottom: 20px;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Add any additional styles specific to the Blood title here */
+        /* ...CSS styles... */
     </style>
     <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js"></script>
@@ -32,26 +20,34 @@
         };
         firebase.initializeApp(firebaseConfig);
 
+        // Get references to HTML elements
+        const inputBox = document.getElementById('inputBox');
+        const saveButton = document.getElementById('saveButton');
+        const textView = document.getElementById('textview');
+
         // Save data to Firebase Realtime Database
-        function saveData() {
-            const inputValue = document.getElementById('inputBox').value;
-            firebase.database().ref('/text').set(inputValue);
-        }
+        saveButton.addEventListener('click', function() {
+            const text = inputBox.value;
+            firebase.database().ref('/text').set(text)
+                .then(function() {
+                    console.log('Data saved successfully.');
+                })
+                .catch(function(error) {
+                    console.error('Error saving data:', error);
+                });
+        });
 
         // Read data from Firebase Realtime Database
-        firebase.database().ref('/text').once('value').then(function(snapshot) {
+        firebase.database().ref('/text').on('value', function(snapshot) {
             const text = snapshot.val();
-            document.getElementById('textview').innerText = text;
+            textView.innerText = text;
         });
     </script>
 </head>
 <body>
     <div class="container">
-        <h1 class="blood-title">Ritz Park Tower Management</h1>
-        <div class="button-container">
-            <input type="text" id="inputBox" placeholder="Enter your text" />
-            <button id="saveButton" class="button" onclick="saveData()">Save</button>
-        </div>
+        <input type="text" id="inputBox" placeholder="Enter text">
+        <button id="saveButton" class="button">Save</button>
         <div class="textview" id="textview"></div>
     </div>
 </body>
