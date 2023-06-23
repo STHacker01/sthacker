@@ -50,11 +50,15 @@
             font-size: 16px;
             text-align: center;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .button:hover {
             background-color: #258cd1;
+        }
+
+        .button:active {
+            transform: scale(0.95);
         }
 
         .textview {
@@ -118,6 +122,13 @@
                     .catch(function(error) {
                         console.error('Error saving data:', error);
                     });
+                    
+                // Add animation class to the button
+                saveButton.classList.add('button-animation');
+                // Remove the animation class after the animation ends
+                setTimeout(function() {
+                    saveButton.classList.remove('button-animation');
+                }, 300);
             });
 
             // Read data from Firebase Realtime Database
@@ -129,5 +140,6 @@
     </script>
 </body>
 </html>
+
 
 
